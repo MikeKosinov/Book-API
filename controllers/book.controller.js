@@ -10,8 +10,12 @@ class BookController {
 
     async getBook(req,res){
         const id = req.params.id;
-        const book = await db.query("SELECT*FROM book WHERE book_id = $1",[id]);
-        res.json(book.rows);
+        const book = await db.query("SELECT * FROM book WHERE book_id = $1",[id]);
+if (book.rows.length===0){
+    res.json("Doesn't exist")}
+else res.json(book)
+
+
           }
 
     async deleteBook(req,res) {
